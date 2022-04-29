@@ -94,7 +94,7 @@ function initEngineerQuestions() {
                 message: "What is your GitHub Username? "
             }
         ]).then(function (response) {
-            // creates a new Manager Object with responses, which adds the response to the employeeArray.
+            // creates a new Engineer Object with responses, which adds the response to the employeeArray.
             const newEngineer = new engineer(
                 response.charName,
                 response.id,
@@ -150,8 +150,8 @@ function addEmployee() {
         .prompt([
             {
                 type: 'list',
-                message: 'Add another Employee?',
                 name: 'secondEmployee',
+                message: 'Add another Employee?',
                 choices: ['Yes', 'No'],
             },
         ]).then(function (choiceTwo) {
@@ -170,6 +170,17 @@ function generateHTML(employeeArray) {
     const Manager = require("./src/internCard");
     const Employee = require("./src/managerCard");
 }
+
+//this function takes the results & writes it to output.html file, which is saved on the /dist directory.
+// function writeToFile(department, htmlString) {
+//     const fs = require('fs');
+//     fs.writeFile(
+//         `./dist/output.html`,
+//         htmlString,
+//         function (err) {
+//             err ? console.error(err) : console.log('Success!');
+//         }
+
 
 // call the initPromptLoop function to start the Prompt Questions
 initPromptLoop();
