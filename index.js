@@ -10,9 +10,9 @@ const managerContainer = require("./src/internCard");
 const inquirer = require('inquirer');
 var employeeArray = [];
 
-// let managers = [];
-// let engineers = [];
-// let interns = [];
+let managerArray = [];
+let engineerArray = [];
+let internArray = [];
 
 function initPromptLoop() {
     inquirer
@@ -66,7 +66,7 @@ function initManagerQuestions() {
                 response.email,
                 response.officeNum,
             );
-            employeeArray.push(newManager);
+            managerArray.push(newManager);
             addEmployee();
         });
 }
@@ -102,7 +102,7 @@ function initEngineerQuestions() {
                 response.email,
                 response.gitHub,
             );
-            employeeArray.push(newEngineer);
+            engineerArray.push(newEngineer);
             addEmployee();
         });
 
@@ -139,7 +139,7 @@ function initInternQuestions() {
                 response.email,
                 response.school,
             );
-            employeeArray.push(newInterns);
+            internArray.push(newInterns);
             addEmployee();
         });
 
@@ -161,77 +161,132 @@ function addEmployee() {
                 initPromptLoop();
                 // if no, Generate the HTML from the saved employees
             } else {
-                generateHTML(employeeArray);
+                generateHTML(managerArray, engineerArray, internArray);
             }
         });
 }
-function generateHTML(employeeArray) {
+function generateHTML(managerArray, engineerArray, internArray) {
     //this function takes the results & writes it to output.html file, which is saved on the /dist directory.
     employeeArray.forEach((element) => {
-        const filename = `./dist/output.html`;
+        const filenames = `./dist/output.html`;
         const getRole = element.getRole();
         let empCard = '';
         if (getRole === 'Manager') {
-            empCard = managerContainer(element);
+            managerArray = managerContainer(element);
         } else if (getRole === 'Engineer') {
-            empCard = engineerContainer(element);
+            engineerArray = engineerContainer(element);
         } else if (getRole === 'Intern') {
-            empCard = internContainer(element);
+            internArray = internContainer(element);
         } else {
             console.error(error);
-        } var string = `<!DOCTYPE html>
-    <html>
-      <head>
-        <title>My Team </title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Karma"
-        />
-        <style>
-          body,
-          h1,
-          h2,
-          h3,
-          h4,
-          h5,
-          h6 {
-            font-family: "Karma", sans-serif;
-          }
-          .w3-bar-block .w3-bar-item {
-            padding: 20px;
-          }
-        </style>
-    </head>
-    <body>
-    <!-- Top menu -->
-    <div class="w3-top">
-        <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
-          <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-          <div class="w3-right w3-padding-16"></div>
-          <div class="w3-center w3-padding-16">TEAM MEMBERS</div>
-        </div>
-      </div>
-    <!-- !PAGE CONTENT! -->
-    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-    
-        <!-- EMPLOYEE container Grid-->
-        <div class="w3-row-padding w3-padding-16 w3-center" id="container">
-        <div class="w3-quarter"> 
-        ${empCard}
-        <!-- Third party JS files linked here -->
-        <script src="script.js"></script>
-        
+        }
+        function generateManagerCard(managerArray) {
+            const managerTemplateLits = managerArray
+                .map((element) => {
+                    return `
+                    <div class="w3-quarter">
+                    <img src="http://placehold.jp/3bc490/ffffff/150x150.png?text=EMPLOYEE%0AIMAGE"></img>
+                    <h3>Name: ${element.charname}</h3>
+                    <h4>${element.getRole()}</h4>
+                    <h4>ID: ${element.id}</h4>
+                    <h4>Email:
+                    <a href="mailto:${element.email}" target="_blank">${element.email}</a></h4>
+                    <h4>Office Number: ${element.officeNumber}</h4>
+                    </div>`;
+                })
+                .join("");
+
+            return managerTemplateLits;
+        }
+        function generateInternCard(internArray) {
+            const internInfo = internArray
+                .map((element) => {
+                    return `
+                    <div class="w3-quarter">
+                    <img src="http://placehold.jp/3bc490/ffffff/150x150.png?text=EMPLOYEE%0AIMAGE"></img>
+                    <h3>Name: ${element.charname}</h3>
+                    <h4>${element.getRole()}</h4>
+                    <h4>ID: ${element.id}</h4>
+                    <h4>Email:
+                    <a href="mailto:${element.email}" target="_blank">${element.email}</a></h4>
+                    <h4>School: ${element.school}</h4>
+                    </div>`;
+                })
+                .join("");
+
+            return internInfo;
+        }
+        function generateEngineerCard(engineerArray) {
+            const engineerInfo = engineerArray
+                .map((element) => {
+                    return `
+                    <div class="w3-quarter">
+                    <img src="http://placehold.jp/3bc490/ffffff/150x150.png?text=EMPLOYEE%0AIMAGE"></img>
+                    <h3>Name: ${element.charname}</h3>
+                    <h4>${element.getRole()}</h4>
+                    <h4>ID: ${element.id}</h4>
+                    <h4>Email:
+                    <a href="mailto:${element.email}" target="_blank">${element.email}</a></h4>
+                    <h4>Github: ${element.github}</h4>
+                    </div>`;
+                })
+                .join("");
+
+            return engineerInfo;
+        }
+        var string = `<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Team </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Karma"
+    />
+    <style>
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Karma", sans-serif;
+      }
+      .w3-bar-block .w3-bar-item {
+        padding: 20px;
+      }
+    </style>
+</head>
+<body>
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+      <div class="w3-right w3-padding-16"></div>
+      <div class="w3-center w3-padding-16">TEAM MEMBERS</div>
+    </div>
+  </div>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+
+    <!-- EMPLOYEE container Grid-->
+    <div class="w3-row-padding w3-padding-16 w3-center" id="container">
+    ${generateManagerCard(managerArray)}
+    ${generateEngineerCard(engineerArray)}
+    ${generateInternCard(internArray)}
+    </div>
     </body>
-    </html>`
+    </html>`;
+        fs.writeFile(filenames, string, (err) =>
+            err ? console.log(err) : console.log('Success!')
+        );
     });
-    fs.writeFile(filename, string, (err) =>
-        err ? console.log(err) : console.log('Success!')
-    );
 }
 
 
 // call the initPromptLoop function to start the Prompt Questions
 initPromptLoop();
+
