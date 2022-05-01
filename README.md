@@ -24,5 +24,8 @@ https://drive.google.com/file/d/1zS6cSkmgF5sNLZOizP0ND8cFLIZcvvyA/view?usp=shari
 ## The URL of the GitHub repository:
 https://github.com/AR31313/TeamProfileGenerator
 
+## TESTING via Jest:
+https://user-images.githubusercontent.com/96843377/166135444-edcdc95b-8d20-4996-9bfb-6c216d127412.mp4
+
 ---
 
