@@ -175,9 +175,10 @@ function generateHTML(managerArray, engineerArray, internArray) {
             const managerTemplateLits = managerArray
                 .map((element) => {
                     return `
-                    <div class="w3-quarter">
-                    <img src="http://placehold.jp/3bc490/ffffff/150x150.png?text=EMPLOYEE%0AIMAGE"></img>
-                    <h3>${element.charname}</h3>
+                    <div class="w3-quarter w3-container">
+                    div { word-wrap: break-word; }
+                    <img src="http://placehold.jp/100/88b495/ffffff/150x150.png?text=M"></img>
+                    <h3>${element.charName}</h3>
                     <h4>${element.getRole()}</h4>
                     <h4>ID: ${element.id}</h4>
                     <h4>Email:
@@ -193,9 +194,9 @@ function generateHTML(managerArray, engineerArray, internArray) {
             const internInfo = internArray
                 .map((element) => {
                     return `
-                    <div class="w3-quarter">
-                    <img src="http://placehold.jp/3bc490/ffffff/150x150.png?text=EMPLOYEE%0AIMAGE"></img>
-                    <h3>Name: ${element.charname}</h3>
+                    <div class="w3-quarter w3-container">
+                    <img src="http://placehold.jp/100/b488ab/ffffff/150x150.png?text=I"></img>
+                    <h3>${element.charName}</h3>
                     <h4>${element.getRole()}</h4>
                     <h4>ID: ${element.id}</h4>
                     <h4>Email:
@@ -211,9 +212,9 @@ function generateHTML(managerArray, engineerArray, internArray) {
             const engineerInfo = engineerArray
                 .map((element) => {
                     return `
-                    <div class="w3-quarter">
-                    <img src="http://placehold.jp/3bc490/ffffff/150x150.png?text=EMPLOYEE%0AIMAGE"></img>
-                    <h3>Name: ${element.charname}</h3>
+                    <div class="w3-quarter w3-container">
+                    <img src="http://placehold.jp/100/88b1b4/ffffff/150x150.png?text=E"></img>
+                    <h3> ${element.charName}</h3>
                     <h4>${element.getRole()}</h4>
                     <h4>ID: ${element.id}</h4>
                     <h4>Email:
