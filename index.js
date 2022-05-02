@@ -170,24 +170,14 @@ function generateHTML(managerArray, engineerArray, internArray) {
     var employeeArray = [managerArray, engineerArray, internArray];
     for (var i = 0; i < employeeArray.length; i++) {
         const filenames = `./dist/output.html`;
-        const getRole = element.getRole();
 
-        if (getRole === 'Manager') {
-            managerArray = managerContainer(element);
-        } else if (getRole === 'Engineer') {
-            engineerArray = engineerContainer(element);
-        } else if (getRole === 'Intern') {
-            internArray = internContainer(element);
-        } else {
-            console.error(error);
-        }
         function generateManagerCard(managerArray) {
             const managerTemplateLits = managerArray
                 .map((element) => {
                     return `
                     <div class="w3-quarter">
                     <img src="http://placehold.jp/3bc490/ffffff/150x150.png?text=EMPLOYEE%0AIMAGE"></img>
-                    <h3>Name: ${element.charname}</h3>
+                    <h3>${element.charname}</h3>
                     <h4>${element.getRole()}</h4>
                     <h4>ID: ${element.id}</h4>
                     <h4>Email:
