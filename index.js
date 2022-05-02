@@ -8,7 +8,7 @@ const managerContainer = require("./src/internCard");
 
 
 const inquirer = require('inquirer');
-var employeeArray = [];
+
 
 let managerArray = [];
 let engineerArray = [];
@@ -167,10 +167,11 @@ function addEmployee() {
 }
 function generateHTML(managerArray, engineerArray, internArray) {
     //this function takes the results & writes it to output.html file, which is saved on the /dist directory.
-    employeeArray.forEach((element) => {
+    var employeeArray = [managerArray, engineerArray, internArray];
+    for (var i = 0; i < employeeArray.length; i++) {
         const filenames = `./dist/output.html`;
         const getRole = element.getRole();
-        let empCard = '';
+
         if (getRole === 'Manager') {
             managerArray = managerContainer(element);
         } else if (getRole === 'Engineer') {
@@ -283,7 +284,7 @@ function generateHTML(managerArray, engineerArray, internArray) {
         fs.writeFile(filenames, string, (err) =>
             err ? console.log(err) : console.log('Success!')
         );
-    });
+    };
 }
 
 
