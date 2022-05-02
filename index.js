@@ -39,7 +39,7 @@ function initManagerQuestions() {
         .prompt([
             {
                 type: "input",
-                name: "charName",
+                name: "name",
                 message: "What is your Name?",
             },
             {
@@ -61,7 +61,7 @@ function initManagerQuestions() {
         .then(function (response) {
             // creates a new Manager Object with responses, which adds the response to the employeeArray.
             const newManager = new manager(
-                response.charName,
+                response.name,
                 response.id,
                 response.email,
                 response.officeNum,
@@ -76,7 +76,7 @@ function initEngineerQuestions() {
         .prompt([
             {
                 type: "input",
-                name: "charName",
+                name: "name",
                 message: "What is your Name?",
             },
             {
@@ -91,16 +91,16 @@ function initEngineerQuestions() {
             },
             {
                 type: "input",
-                name: "gitHub",
+                name: "gitHubUSER",
                 message: "What is your GitHub Username? "
             }
         ]).then(function (response) {
             // creates a new Engineer Object with responses, which adds the response to the employeeArray.
             const newEngineer = new engineer(
-                response.charName,
+                response.name,
                 response.id,
                 response.email,
-                response.gitHub,
+                response.gitHubUSER,
             );
             engineerArray.push(newEngineer);
             addEmployee();
@@ -113,7 +113,7 @@ function initInternQuestions() {
         .prompt([
             {
                 type: "input",
-                name: "charName",
+                name: "name",
                 message: "What is your Name?",
             },
             {
@@ -134,7 +134,7 @@ function initInternQuestions() {
         ]).then(function (response) {
             // creates a new Manager Object with responses, which adds the response to the employeeArray.
             const newInterns = new intern(
-                response.charName,
+                response.name,
                 response.id,
                 response.email,
                 response.school,
@@ -170,15 +170,14 @@ function generateHTML(managerArray, engineerArray, internArray) {
     var employeeArray = [managerArray, engineerArray, internArray];
     for (var i = 0; i < employeeArray.length; i++) {
         const filenames = `./dist/output.html`;
-
+        console.log(employeeArray);
         function generateManagerCard(managerArray) {
             const managerTemplateLits = managerArray
                 .map((element) => {
                     return `
                     <div class="w3-quarter w3-container">
-                    div { word-wrap: break-word; }
                     <img src="http://placehold.jp/100/88b495/ffffff/150x150.png?text=M"></img>
-                    <h3>${element.charName}</h3>
+                    <h3>${element.name}</h3>
                     <h4>${element.getRole()}</h4>
                     <h4>ID: ${element.id}</h4>
                     <h4>Email:
@@ -196,7 +195,7 @@ function generateHTML(managerArray, engineerArray, internArray) {
                     return `
                     <div class="w3-quarter w3-container">
                     <img src="http://placehold.jp/100/b488ab/ffffff/150x150.png?text=I"></img>
-                    <h3>${element.charName}</h3>
+                    <h3>${element.name}</h3>
                     <h4>${element.getRole()}</h4>
                     <h4>ID: ${element.id}</h4>
                     <h4>Email:
@@ -214,12 +213,12 @@ function generateHTML(managerArray, engineerArray, internArray) {
                     return `
                     <div class="w3-quarter w3-container">
                     <img src="http://placehold.jp/100/88b1b4/ffffff/150x150.png?text=E"></img>
-                    <h3> ${element.charName}</h3>
+                    <h3> ${element.name}</h3>
                     <h4>${element.getRole()}</h4>
                     <h4>ID: ${element.id}</h4>
                     <h4>Email:
                     <a href="mailto:${element.email}" target="_blank">${element.email}</a></h4>
-                    <h4>Github: ${element.github}</h4>
+                    <h4>Github:<a href="https://github.com/${element.gitHubUSER}"target="_blank"rel="noopener noreferrer">${element.gitHubUSER}</a></h4>
                     </div>`;
                 })
                 .join("");
