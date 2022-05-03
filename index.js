@@ -175,9 +175,10 @@ function generateHTML(managerArray, engineerArray, internArray) {
             const managerTemplateLits = managerArray
                 .map((element) => {
                     return `
-                    <div class="w3-quarter w3-container">
-                    <img src="http://placehold.jp/100/88b495/ffffff/150x150.png?text=M"></img>
+                    <div class="w3-quarter w3-container w3-border">
                     <h3>${element.name}</h3>
+                    <img src="http://placehold.jp/100/88b495/ffffff/150x150.png?text=M"></img>
+                    
                     <h4>${element.getRole()}</h4>
                     <h4>ID: ${element.id}</h4>
                     <h4>Email:
@@ -193,9 +194,10 @@ function generateHTML(managerArray, engineerArray, internArray) {
             const internInfo = internArray
                 .map((element) => {
                     return `
-                    <div class="w3-quarter w3-container">
-                    <img src="http://placehold.jp/100/b488ab/ffffff/150x150.png?text=I"></img>
+                    <div class="w3-quarter w3-container w3-border">
                     <h3>${element.name}</h3>
+                    <img src="http://placehold.jp/100/b488ab/ffffff/150x150.png?text=I"></img>
+                    
                     <h4>${element.getRole()}</h4>
                     <h4>ID: ${element.id}</h4>
                     <h4>Email:
@@ -211,14 +213,15 @@ function generateHTML(managerArray, engineerArray, internArray) {
             const engineerInfo = engineerArray
                 .map((element) => {
                     return `
-                    <div class="w3-quarter w3-container">
-                    <img src="http://placehold.jp/100/88b1b4/ffffff/150x150.png?text=E"></img>
+                    <div class="w3-quarter w3-container w3-border w3-round-xlarge" >
                     <h3> ${element.name}</h3>
+                    <img src="http://placehold.jp/100/88b1b4/ffffff/150x150.png?text=E"></img>
+                    
                     <h4>${element.getRole()}</h4>
                     <h4>ID: ${element.id}</h4>
                     <h4>Email:
                     <a href="mailto:${element.email}" target="_blank">${element.email}</a></h4>
-                    <h4>Github:<a href="https://github.com/${element.gitHubUSER}"target="_blank"rel="noopener noreferrer">${element.gitHubUSER}</a></h4>
+                    <h4>Github: <a href="https://github.com/${element.github}" target = "_blank">${element.github}</a></h4>
                     </div>`;
                 })
                 .join("");
@@ -265,9 +268,11 @@ function generateHTML(managerArray, engineerArray, internArray) {
 
     <!-- EMPLOYEE container Grid-->
     <div class="w3-row-padding w3-padding-16 w3-center" id="container">
+    <div class="w3-container">
     ${generateManagerCard(managerArray)}
     ${generateEngineerCard(engineerArray)}
     ${generateInternCard(internArray)}
+    </div>
     </div>
     </body>
     </html>`;
